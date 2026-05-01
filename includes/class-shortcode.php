@@ -60,10 +60,10 @@ class PL_Shortcode {
         $post    = get_post( $post_id );
         $options = get_option( 'pl_options', [] );
 
-        $title   = get_the_title( $post_id );
-        $excerpt = get_the_excerpt( $post );
-        $content = get_post_field( 'post_content', $post_id );
-        $date    = get_the_date( 'd/m/Y', $post_id );
+        $title       = get_the_title( $post_id );
+        $description = get_post_meta( $post_id, 'pl_description', true );
+        $content     = get_post_field( 'post_content', $post_id );
+        $date        = get_the_date( 'd/m/Y', $post_id );
 
         $views  = intval( get_post_meta( $post_id, 'pl_views', true ) );
         $likes  = intval( get_post_meta( $post_id, 'pl_likes', true ) );
@@ -87,7 +87,9 @@ class PL_Shortcode {
             </div>
 
             <h3 class="pl-card-title"><?php echo esc_html( $title ); ?></h3>
-            <p class="pl-card-excerpt"><?php echo esc_html( $excerpt ); ?></p>
+            <?php if ( $description ) : ?>
+            <p class="pl-card-excerpt"><?php echo esc_html( $description ); ?></p>
+            <?php endif; ?>
 
             <div class="pl-stats">
                 <span class="pl-stat" title="<?php esc_attr_e( 'Bekeken', 'prompt-library' ); ?>">
@@ -117,8 +119,8 @@ class PL_Shortcode {
                     <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="pl-tool-btn pl-perplexity" title="<?php esc_attr_e( 'Open in Perplexity', 'prompt-library' ); ?>">Pplx</a>
                 </div>
 
-                <button class="pl-like-btn <?php echo $user_liked ? 'pl-liked' : ''; ?>" data-id="<?php echo $post_id; ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="<?php echo $user_liked ? 'currentColor' : 'none'; ?>"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <button class="pl-like-btn<?php echo $user_liked ? ' pl-liked' : ''; ?>" data-id="<?php echo $post_id; ?>">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </button>
             </div>
         </div>

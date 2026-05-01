@@ -209,9 +209,9 @@
 .pl-cat-badge {
     background: var(--pl-green-light);
     color: var(--pl-green);
-    font-size: .75rem;
+    font-size: .85rem;
     font-weight: 700;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: .04em;
@@ -222,7 +222,7 @@
 }
 
 .pl-date {
-    font-size: .8rem;
+    font-size: .9rem;
     color: var(--pl-muted);
     white-space: nowrap;
     flex-shrink: 0;
@@ -230,7 +230,7 @@
 
 /* Title */
 .pl-card-title {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--pl-blue);
     margin: 0;
@@ -239,9 +239,9 @@
 
 /* Excerpt */
 .pl-card-excerpt {
-    font-size: .93rem;
+    font-size: 1rem;
     color: var(--pl-muted);
-    line-height: 1.55;
+    line-height: 1.6;
     margin: 0;
     flex-grow: 1;
     display: -webkit-box;
@@ -253,8 +253,8 @@
 /* Stats row */
 .pl-stats {
     display: flex;
-    gap: 14px;
-    padding: 10px 0;
+    justify-content: space-between;
+    padding: 12px 0;
     border-top: 1px solid var(--pl-border);
     border-bottom: 1px solid var(--pl-border);
 }
@@ -262,15 +262,15 @@
 .pl-stat {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: .85rem;
+    gap: 6px;
+    font-size: 1rem;
     color: var(--pl-muted);
     font-weight: 600;
 }
 
 .pl-stat svg {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
 }
 
@@ -287,13 +287,13 @@
 .pl-copy-btn {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
     background: var(--pl-green);
     color: var(--pl-white);
     border: none;
     border-radius: 8px;
-    padding: 9px 14px;
-    font-size: .87rem;
+    padding: 11px 18px;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     transition: background .2s, transform .15s;
@@ -325,10 +325,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 34px;
-    padding: 0 9px;
+    height: 38px;
+    padding: 0 11px;
     border-radius: 7px;
-    font-size: .7rem;
+    font-size: .78rem;
     font-weight: 800;
     text-decoration: none !important;
     color: var(--pl-white) !important;
@@ -352,8 +352,8 @@
     background: none;
     border: 2px solid var(--pl-border);
     border-radius: 8px;
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -366,11 +366,18 @@
 }
 
 .pl-like-btn svg {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    transition: fill .2s;
 }
 
-.pl-like-btn:hover,
+.pl-like-btn:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+    background: #fef2f2;
+}
+
 .pl-like-btn.pl-liked {
     border-color: #e74c3c;
     color: #e74c3c;

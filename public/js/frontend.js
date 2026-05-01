@@ -84,7 +84,6 @@
             if (res.success) {
                 var $card = $btn.closest('.pl-card');
                 $btn.toggleClass('pl-liked', res.data.liked);
-                $btn.find('svg').attr('fill', res.data.liked ? 'currentColor' : 'none');
                 $card.find('.pl-likes-count').text(res.data.count);
             }
         });
