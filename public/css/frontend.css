@@ -1,1 +1,409 @@
 /* Prompt Library — Frontend styles */
+/* Colors: #1b6b4a (green/primary), #e8913a (orange/accent), #2b5c8a (blue/titles) */
+
+:root {
+    --pl-green:        #1b6b4a;
+    --pl-green-dark:   #155839;
+    --pl-green-light:  #e8f4ef;
+    --pl-orange:       #e8913a;
+    --pl-orange-dark:  #d4812f;
+    --pl-blue:         #2b5c8a;
+    --pl-text:         #2c2c2c;
+    --pl-muted:        #6b7280;
+    --pl-border:       #e5e7eb;
+    --pl-bg:           #f9fafb;
+    --pl-white:        #ffffff;
+    --pl-radius:       12px;
+    --pl-shadow:       0 2px 12px rgba(0,0,0,.08);
+    --pl-shadow-hover: 0 6px 24px rgba(0,0,0,.14);
+}
+
+/* ── Wrapper ── */
+.pl-wrap {
+    font-family: inherit;
+    color: var(--pl-text);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ── Intro text ── */
+.pl-intro {
+    background: var(--pl-green-light);
+    border-left: 5px solid var(--pl-green);
+    border-radius: 0 var(--pl-radius) var(--pl-radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* ── Access blocked ── */
+.pl-access-blocked {
+    text-align: center;
+    padding: 60px 24px;
+    background: var(--pl-bg);
+    border-radius: var(--pl-radius);
+    border: 2px dashed var(--pl-border);
+}
+
+.pl-locked-icon svg {
+    width: 56px;
+    height: 56px;
+    stroke: var(--pl-muted);
+    margin-bottom: 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pl-access-blocked p {
+    font-size: 1.1rem;
+    color: var(--pl-muted);
+    margin-bottom: 24px;
+}
+
+.pl-cta-btn {
+    display: inline-block;
+    background: var(--pl-orange);
+    color: var(--pl-white) !important;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none !important;
+    transition: background .2s, transform .15s;
+}
+
+.pl-cta-btn:hover {
+    background: var(--pl-orange-dark);
+    transform: translateY(-2px);
+}
+
+/* ── Toolbar ── */
+.pl-toolbar {
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pl-search-wrap {
+    position: relative;
+    max-width: 480px;
+}
+
+.pl-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    stroke: var(--pl-muted);
+    pointer-events: none;
+}
+
+.pl-search-input {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    font-size: 1rem;
+    border: 2px solid var(--pl-border);
+    border-radius: 50px;
+    outline: none;
+    background: var(--pl-white);
+    transition: border-color .2s;
+    box-sizing: border-box;
+}
+
+.pl-search-input:focus {
+    border-color: var(--pl-green);
+}
+
+/* Category filter pills */
+.pl-cat-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pl-cat-btn {
+    background: var(--pl-white);
+    color: var(--pl-text);
+    border: 2px solid var(--pl-border);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+}
+
+.pl-cat-btn:hover {
+    border-color: var(--pl-green);
+    color: var(--pl-green);
+}
+
+.pl-cat-btn.active {
+    background: var(--pl-green);
+    border-color: var(--pl-green);
+    color: var(--pl-white);
+}
+
+/* ── Grid — 3 columns ── */
+.pl-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+    transition: opacity .2s;
+}
+
+.pl-grid.pl-loading {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.pl-no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--pl-muted);
+    font-size: 1rem;
+    padding: 40px;
+}
+
+@media (max-width: 960px) {
+    .pl-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 580px) {
+    .pl-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Card ── */
+.pl-card {
+    background: var(--pl-white);
+    border: 1px solid var(--pl-border);
+    border-radius: var(--pl-radius);
+    box-shadow: var(--pl-shadow);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: box-shadow .2s, transform .2s;
+}
+
+.pl-card:hover {
+    box-shadow: var(--pl-shadow-hover);
+    transform: translateY(-3px);
+}
+
+/* Card header row */
+.pl-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.pl-cat-badge {
+    background: var(--pl-green-light);
+    color: var(--pl-green);
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
+}
+
+.pl-date {
+    font-size: .8rem;
+    color: var(--pl-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Title */
+.pl-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--pl-blue);
+    margin: 0;
+    line-height: 1.35;
+}
+
+/* Excerpt */
+.pl-card-excerpt {
+    font-size: .93rem;
+    color: var(--pl-muted);
+    line-height: 1.55;
+    margin: 0;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Stats row */
+.pl-stats {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-top: 1px solid var(--pl-border);
+    border-bottom: 1px solid var(--pl-border);
+}
+
+.pl-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .85rem;
+    color: var(--pl-muted);
+    font-weight: 600;
+}
+
+.pl-stat svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+/* Actions row */
+.pl-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+/* Copy button */
+.pl-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--pl-green);
+    color: var(--pl-white);
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: .87rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+}
+
+.pl-copy-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.pl-copy-btn:hover {
+    background: var(--pl-green-dark);
+    transform: translateY(-1px);
+}
+
+.pl-copy-btn.pl-copied {
+    background: var(--pl-green-dark);
+}
+
+/* Open-in AI tool buttons */
+.pl-open-in {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.pl-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-size: .7rem;
+    font-weight: 800;
+    text-decoration: none !important;
+    color: var(--pl-white) !important;
+    letter-spacing: .02em;
+    transition: opacity .2s, transform .15s;
+    white-space: nowrap;
+}
+
+.pl-tool-btn:hover {
+    opacity: .82;
+    transform: translateY(-1px);
+}
+
+.pl-chatgpt    { background: #10a37f; }
+.pl-claude     { background: #d97706; }
+.pl-gemini     { background: #4285f4; }
+.pl-perplexity { background: #1a1a2e; }
+
+/* Like button */
+.pl-like-btn {
+    background: none;
+    border: 2px solid var(--pl-border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 0;
+    color: var(--pl-muted);
+}
+
+.pl-like-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+.pl-like-btn:hover,
+.pl-like-btn.pl-liked {
+    border-color: #e74c3c;
+    color: #e74c3c;
+    background: #fef2f2;
+}
+
+.pl-like-btn.pl-liked svg {
+    fill: #e74c3c;
+}
+
+/* ── Load more button ── */
+.pl-pagination {
+    text-align: center;
+}
+
+.pl-load-more {
+    background: none;
+    border: 2px solid var(--pl-green);
+    color: var(--pl-green);
+    border-radius: 50px;
+    padding: 12px 32px;
+    font-size: .95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.pl-load-more:hover {
+    background: var(--pl-green);
+    color: var(--pl-white);
+}
+
+.pl-load-more:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}

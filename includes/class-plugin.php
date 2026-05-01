@@ -7,6 +7,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 class PL_Plugin {
 
     public function run() {
+        $cpt = new PL_CPT();
+        $cpt->register();
+
+        $ajax = new PL_Ajax();
+        $ajax->init();
+
+        $shortcode = new PL_Shortcode();
+        $shortcode->init();
+
         add_action( 'init', [ $this, 'load_textdomain' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_assets' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
@@ -41,6 +50,18 @@ class PL_Plugin {
             PL_VERSION,
             true
         );
+
+        wp_localize_script( 'prompt-library-frontend', 'plData', [
+            'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
+            'nonce'      => wp_create_nonce( 'pl_nonce' ),
+            'isLoggedIn' => is_user_logged_in(),
+            'strings'    => [
+                'copied'      => __( 'Gekopieerd!', 'prompt-library' ),
+                'copy'        => __( 'Kopieer prompt', 'prompt-library' ),
+                'loginToLike' => __( 'Log in om te liken', 'prompt-library' ),
+                'noResults'   => __( 'Geen prompts gevonden.', 'prompt-library' ),
+            ],
+        ] );
     }
 
     public function enqueue_admin_assets() {

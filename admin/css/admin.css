@@ -1,1 +1,23 @@
 /* Prompt Library — Admin styles */
+
+.pl-admin-wrap h1 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+
+.pl-shortcode-hint {
+    background: #f0f6fc;
+    border-left: 4px solid #2b5c8a;
+    padding: 10px 16px;
+    margin-bottom: 24px;
+    border-radius: 0 6px 6px 0;
+    font-size: .95rem;
+}
+
+.pl-shortcode-hint code {
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: .95rem;
+}
