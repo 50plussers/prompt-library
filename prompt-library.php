@@ -3,20 +3,22 @@
  * Plugin Name: Prompt Library
  * Plugin URI:  https://50plussers.be
  * Description: Doorzoekbare AI-promptbibliotheek voor 50plussers.be met PMPro-integratie.
- * Version:     1.0.0
+ * Version:     1.2.0
  * Author:      Blueblot
  * Author URI:  https://blueblot.be
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: prompt-library
  * Domain Path: /languages
+ * GitHub Plugin URI: 50plussers/prompt-library
+ * Primary Branch: main
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'PL_VERSION',    '1.0.0' );
+define( 'PL_VERSION',    '1.2.0' );
 define( 'PL_PLUGIN_FILE', __FILE__ );
 define( 'PL_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'PL_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
