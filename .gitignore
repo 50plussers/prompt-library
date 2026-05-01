@@ -1,0 +1,30 @@
+# WordPress
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup-db/
+sitemap*.xml
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build output
+/dist/
+*.min.css
+*.min.js
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs & temp
+*.log
+*.tmp
+*.bak
