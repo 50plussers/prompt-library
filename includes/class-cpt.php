@@ -71,8 +71,6 @@ class PL_CPT {
         if ( get_post_type( $post_id ) !== 'pl_prompt' ) return;
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
         if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-        if ( ! isset( $_POST['pl_meta_nonce'] ) ) return;
-        if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pl_meta_nonce'] ) ), 'pl_save_meta' ) ) return;
 
         if ( array_key_exists( 'pl_prompt', $_POST ) ) {
             update_post_meta( $post_id, 'pl_prompt', sanitize_textarea_field( wp_unslash( $_POST['pl_prompt'] ) ) );

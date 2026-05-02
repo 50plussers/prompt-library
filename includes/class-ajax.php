@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class PL_Ajax {
 
     public function init() {
-        $actions = [ 'pl_load_prompts', 'pl_track_copy', 'pl_track_view', 'pl_toggle_like' ];
+        $actions = [ 'pl_load_prompts', 'pl_track_copy', 'pl_track_view', 'pl_toggle_like', 'pl_get_prompt' ];
         foreach ( $actions as $action ) {
             add_action( 'wp_ajax_' . $action,        [ $this, str_replace( 'pl_', '', $action ) ] );
             add_action( 'wp_ajax_nopriv_' . $action, [ $this, str_replace( 'pl_', '', $action ) ] );
@@ -64,6 +64,19 @@ class PL_Ajax {
             'max_pages' => $query->max_num_pages,
             'page'      => $page,
         ] );
+    }
+
+    public function get_prompt() {
+        check_ajax_referer( 'pl_nonce', 'nonce' );
+        $post_id = intval( $_POST['id'] ?? 0 );
+        if ( ! $post_id || get_post_type( $post_id ) !== 'pl_prompt' ) {
+            wp_send_json_error( [ 'message' => 'invalid' ] );
+        }
+        $text = get_post_meta( $post_id, 'pl_prompt', true );
+        if ( ! $text ) {
+            $text = get_post_meta( $post_id, 'pl_description', true );
+        }
+        wp_send_json_success( [ 'text' => (string) $text ] );
     }
 
     public function track_copy() {
