@@ -62,7 +62,8 @@ class PL_Shortcode {
 
         $title       = get_the_title( $post_id );
         $description = wp_strip_all_tags( get_post_field( 'post_content', $post_id ) );
-        $prompt_text = get_post_meta( $post_id, 'pl_prompt', true );
+        $prompt_text = get_post_meta( $post_id, 'pl_prompt', true )
+                    ?: get_post_meta( $post_id, 'pl_description', true );
         $date        = get_the_date( 'd/m/Y', $post_id );
 
         $views  = intval( get_post_meta( $post_id, 'pl_views', true ) );

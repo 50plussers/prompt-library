@@ -32,38 +32,46 @@
     }
 
     // ── Copy button ──
-    $(document).on('click', '.pl-copy-btn', function () {
-        var $btn    = $(this);
-        var id      = $btn.data('id');
-        var text    = $btn.data('prompt');
-        var $label  = $btn.find('.pl-copy-label');
-
-        if (!navigator.clipboard) {
-            // Fallback for older browsers
-            var $tmp = $('<textarea>').val(text).appendTo('body').select();
-            document.execCommand('copy');
-            $tmp.remove();
-        } else {
-            navigator.clipboard.writeText(text);
+    function doCopy(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text);
         }
+        // Fallback (HTTP of oudere browser)
+        var $tmp = $('<textarea>').css({ position: 'fixed', top: 0, left: 0, opacity: 0 })
+                      .val(text).appendTo('body');
+        $tmp[0].select();
+        document.execCommand('copy');
+        $tmp.remove();
+        return Promise.resolve();
+    }
 
-        $label.text(plData.strings.copied);
-        $btn.addClass('pl-copied');
+    $(document).on('click', '.pl-copy-btn', function () {
+        var $btn   = $(this);
+        var id     = $btn.data('id');
+        var text   = String($btn.data('prompt') || '');
+        var $label = $btn.find('.pl-copy-label');
 
-        setTimeout(function () {
-            $label.text(plData.strings.copy);
-            $btn.removeClass('pl-copied');
-        }, 2000);
+        if (!text) return;
 
-        // Track copy count
-        $.post(plData.ajaxUrl, {
-            action: 'pl_track_copy',
-            nonce:  plData.nonce,
-            id:     id,
-        }, function (res) {
-            if (res.success) {
-                $btn.closest('.pl-card').find('.pl-copies-count').text(res.data.copies);
-            }
+        doCopy(text).then(function () {
+            $label.text(plData.strings.copied);
+            $btn.addClass('pl-copied');
+            setTimeout(function () {
+                $label.text(plData.strings.copy);
+                $btn.removeClass('pl-copied');
+            }, 2000);
+
+            $.post(plData.ajaxUrl, {
+                action: 'pl_track_copy',
+                nonce:  plData.nonce,
+                id:     id,
+            }, function (res) {
+                if (res.success) {
+                    $btn.closest('.pl-card').find('.pl-copies-count').text(res.data.copies);
+                }
+            });
+        }).catch(function () {
+            alert('Kopiëren mislukt. Selecteer de tekst handmatig.');
         });
     });
 
