@@ -250,6 +250,11 @@
     overflow: hidden;
 }
 
+/* Hidden prompt data field */
+.pl-prompt-raw {
+    display: none !important;
+}
+
 /* Prompt box */
 .pl-prompt-box {
     background-color: #e8f4ef;

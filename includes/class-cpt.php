@@ -10,7 +10,7 @@ class PL_CPT {
         add_action( 'init',             [ $this, 'register_post_type' ] );
         add_action( 'init',             [ $this, 'register_taxonomy' ] );
         add_action( 'add_meta_boxes',   [ $this, 'add_meta_boxes' ] );
-        add_action( 'save_post_pl_prompt', [ $this, 'save_meta' ] );
+        add_action( 'save_post', [ $this, 'save_meta' ], 10, 1 );
     }
 
     public function register_post_type() {
@@ -67,16 +67,14 @@ class PL_CPT {
     }
 
     public function save_meta( $post_id ) {
-        if ( ! isset( $_POST['pl_meta_nonce'] ) || ! wp_verify_nonce( $_POST['pl_meta_nonce'], 'pl_save_meta' ) ) {
-            return;
-        }
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-            return;
-        }
-        if ( ! current_user_can( 'edit_post', $post_id ) ) {
-            return;
-        }
-        if ( isset( $_POST['pl_prompt'] ) ) {
+        if ( wp_is_post_revision( $post_id ) ) return;
+        if ( get_post_type( $post_id ) !== 'pl_prompt' ) return;
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+        if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+        if ( ! isset( $_POST['pl_meta_nonce'] ) ) return;
+        if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pl_meta_nonce'] ) ), 'pl_save_meta' ) ) return;
+
+        if ( array_key_exists( 'pl_prompt', $_POST ) ) {
             update_post_meta( $post_id, 'pl_prompt', sanitize_textarea_field( wp_unslash( $_POST['pl_prompt'] ) ) );
         }
     }

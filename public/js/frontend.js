@@ -48,7 +48,7 @@
     $(document).on('click', '.pl-copy-btn', function () {
         var $btn   = $(this);
         var id     = $btn.attr('data-id');
-        var text   = $btn.attr('data-prompt') || '';
+        var text   = ($btn.closest('.pl-card').find('.pl-prompt-raw').val() || '').trim();
         var $label = $btn.find('.pl-copy-label');
 
         if (!text) return;
