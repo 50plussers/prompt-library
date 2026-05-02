@@ -230,18 +230,18 @@
 
 /* Title */
 .pl-card-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--pl-blue);
     margin: 0;
-    line-height: 1.35;
+    line-height: 1.3;
 }
 
 /* Excerpt */
 .pl-card-excerpt {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--pl-muted);
-    line-height: 1.6;
+    line-height: 1.65;
     margin: 0;
     flex-grow: 1;
     display: -webkit-box;
@@ -260,21 +260,21 @@
 
 .pl-prompt-label {
     display: block;
-    font-size: .72rem;
+    font-size: .8rem;
     font-weight: 800;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--pl-green);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .pl-prompt-preview {
-    font-size: .95rem;
+    font-size: 1.05rem;
     color: var(--pl-text);
-    line-height: 1.6;
+    line-height: 1.65;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

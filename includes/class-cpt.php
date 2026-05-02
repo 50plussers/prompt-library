@@ -38,20 +38,32 @@ class PL_CPT {
 
     public function add_meta_boxes() {
         add_meta_box(
-            'pl_description_box',
+            'pl_description_hint',
             __( 'Beschrijving (zichtbaar op de kaart)', 'prompt-library' ),
-            [ $this, 'render_description_box' ],
+            [ $this, 'render_description_hint' ],
             'pl_prompt',
             'normal',
             'high'
         );
+        add_meta_box(
+            'pl_prompt_box',
+            __( 'AI-Prompt tekst (wordt gekopieerd)', 'prompt-library' ),
+            [ $this, 'render_prompt_box' ],
+            'pl_prompt',
+            'normal',
+            'default'
+        );
     }
 
-    public function render_description_box( $post ) {
-        $desc = get_post_meta( $post->ID, 'pl_description', true );
+    public function render_description_hint( $post ) {
+        echo '<p style="margin:0;color:#666;">' . esc_html__( 'Gebruik het grote tekstveld hierboven voor de korte beschrijving die op de kaart verschijnt.', 'prompt-library' ) . '</p>';
+    }
+
+    public function render_prompt_box( $post ) {
+        $prompt = get_post_meta( $post->ID, 'pl_prompt', true );
         wp_nonce_field( 'pl_save_meta', 'pl_meta_nonce' );
-        echo '<textarea name="pl_description" rows="3" style="width:100%;font-size:14px;padding:8px;">' . esc_textarea( $desc ) . '</textarea>';
-        echo '<p class="description">' . esc_html__( 'Korte beschrijving die zichtbaar is op de kaart. De tekst hieronder is de eigenlijke prompt.', 'prompt-library' ) . '</p>';
+        echo '<textarea name="pl_prompt" rows="6" style="width:100%;font-size:14px;padding:8px;font-family:monospace;">' . esc_textarea( $prompt ) . '</textarea>';
+        echo '<p class="description">' . esc_html__( 'De eigenlijke AI-prompttekst. Dit is wat de gebruiker kopieert en in ChatGPT, Claude, enz. plakt.', 'prompt-library' ) . '</p>';
     }
 
     public function save_meta( $post_id ) {
@@ -64,8 +76,8 @@ class PL_CPT {
         if ( ! current_user_can( 'edit_post', $post_id ) ) {
             return;
         }
-        if ( isset( $_POST['pl_description'] ) ) {
-            update_post_meta( $post_id, 'pl_description', sanitize_textarea_field( wp_unslash( $_POST['pl_description'] ) ) );
+        if ( isset( $_POST['pl_prompt'] ) ) {
+            update_post_meta( $post_id, 'pl_prompt', sanitize_textarea_field( wp_unslash( $_POST['pl_prompt'] ) ) );
         }
     }
 
