@@ -87,8 +87,16 @@ class PL_Shortcode {
             </div>
 
             <h3 class="pl-card-title"><?php echo esc_html( $title ); ?></h3>
+
             <?php if ( $description ) : ?>
             <p class="pl-card-excerpt"><?php echo esc_html( $description ); ?></p>
+            <?php endif; ?>
+
+            <?php if ( $prompt_text ) : ?>
+            <div class="pl-prompt-box">
+                <span class="pl-prompt-label"><?php esc_html_e( 'AI-Prompt', 'prompt-library' ); ?></span>
+                <p class="pl-prompt-preview"><?php echo esc_html( $prompt_text ); ?></p>
+            </div>
             <?php endif; ?>
 
             <div class="pl-stats">
