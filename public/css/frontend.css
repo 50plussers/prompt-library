@@ -252,24 +252,29 @@
 
 /* Prompt box */
 .pl-prompt-box {
-    background: var(--pl-green-light);
-    border-radius: 8px;
-    padding: 14px 16px;
-    border-left: 4px solid var(--pl-green);
+    background-color: #e8f4ef;
+    background-color: var(--pl-green-light);
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-left: 5px solid #1b6b4a;
+    border-left-color: var(--pl-green);
+    margin-top: 4px;
 }
 
 .pl-prompt-label {
     display: block;
-    font-size: .8rem;
+    font-size: .82rem;
     font-weight: 800;
     letter-spacing: .1em;
     text-transform: uppercase;
+    color: #1b6b4a;
     color: var(--pl-green);
     margin-bottom: 10px;
 }
 
 .pl-prompt-preview {
     font-size: 1.05rem;
+    color: #2c2c2c;
     color: var(--pl-text);
     line-height: 1.65;
     margin: 0;

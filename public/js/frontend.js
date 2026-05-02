@@ -47,8 +47,8 @@
 
     $(document).on('click', '.pl-copy-btn', function () {
         var $btn   = $(this);
-        var id     = $btn.data('id');
-        var text   = String($btn.data('prompt') || '');
+        var id     = $btn.attr('data-id');
+        var text   = $btn.attr('data-prompt') || '';
         var $label = $btn.find('.pl-copy-label');
 
         if (!text) return;
