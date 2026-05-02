@@ -185,7 +185,29 @@
         loadPrompts(true);
     });
 
+    // ── Vul prompt-boxen via AJAX (werkt ook bij pagina-cache) ──
+    function populatePromptBoxes() {
+        $('.pl-prompt-box').each(function () {
+            var $box     = $(this);
+            var $preview = $box.find('.pl-prompt-preview');
+            if ($preview.text().trim()) return; // al ingevuld door PHP
+            var id = $box.data('post-id');
+            if (!id) return;
+
+            $.post(plData.ajaxUrl, {
+                action: 'pl_get_prompt',
+                nonce:  plData.nonce,
+                id:     id,
+            }, function (res) {
+                if (res.success && res.data.text) {
+                    $preview.text(res.data.text);
+                }
+            });
+        });
+    }
+
     // ── Init ──
     trackViews();
+    populatePromptBoxes();
 
 })(jQuery);

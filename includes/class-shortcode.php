@@ -93,12 +93,10 @@ class PL_Shortcode {
             <p class="pl-card-excerpt"><?php echo esc_html( $description ); ?></p>
             <?php endif; ?>
 
-            <?php if ( $prompt_text ) : ?>
-            <div class="pl-prompt-box">
+            <div class="pl-prompt-box" data-post-id="<?php echo $post_id; ?>">
                 <span class="pl-prompt-label"><?php esc_html_e( 'AI-Prompt', 'prompt-library' ); ?></span>
                 <p class="pl-prompt-preview"><?php echo esc_html( $prompt_text ); ?></p>
             </div>
-            <?php endif; ?>
 
             <div class="pl-stats">
                 <span class="pl-stat" title="<?php esc_attr_e( 'Bekeken', 'prompt-library' ); ?>">

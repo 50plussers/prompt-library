@@ -264,6 +264,12 @@
     border-left: 5px solid #1b6b4a;
     border-left-color: var(--pl-green);
     margin-top: 4px;
+    display: block;
+}
+
+.pl-prompt-box:empty,
+.pl-prompt-box .pl-prompt-preview:empty {
+    display: none;
 }
 
 .pl-prompt-label {
